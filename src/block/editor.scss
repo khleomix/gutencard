@@ -15,10 +15,7 @@
 	} // .button-container
 
 	.wp-block-gutencard-block-gutencard {
-		background-color: $color-white;
-		border: 1px solid $color-blue;
-		color: $color-white;
-		padding: rem(10);
+		background: $color-white;
 
 		.image {
 			height: auto;

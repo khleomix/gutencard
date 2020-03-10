@@ -1,8 +1,7 @@
 /**
  * BLOCK: gutencard
  *
- * Registering a basic block with Gutenberg.
- * Simple block, renders and saves the same content without any interactivity.
+ * Registering a customizable block.
  */
 
 //  Import CSS.
@@ -11,12 +10,12 @@ import './style.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
-const { RichText, MediaUpload, PlainText, BlockControls, AlignmentToolbar, InspectorControls, ColorPalette } = wp.editor;
+const { RichText, BlockControls, AlignmentToolbar, InspectorControls, ColorPalette } = wp.editor;
 const { Fragment } = wp.element;
-const { TextControl, ToggleControl, Panel, PanelBody, PanelRow } = wp.components;
+const { Panel, PanelBody, PanelRow } = wp.components;
 
 /**
- * Register: aa Gutenberg Block.
+ * Register: a Gutenberg Block.
  *
  * Registers a new block provided a unique name and an object defining its
  * behavior. Once registered, the block is made editor as an option to any
@@ -29,10 +28,9 @@ const { TextControl, ToggleControl, Panel, PanelBody, PanelRow } = wp.components
  *                             registered; otherwise `undefined`.
  */
 registerBlockType( 'gutencard/block-gutencard', {
-	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'Gutencard' ), // Block title.
+	title: __( 'Gutencard' ),
 	icon: { background: '#000', foreground: '#F38A8A', src: 'buddicons-activity' },
-	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+	category: 'common',
 	keywords: [
 		__( 'gutencard' ),
 		__( 'custom card block' ),
@@ -43,13 +41,6 @@ registerBlockType( 'gutencard/block-gutencard', {
 			source: 'children',
 			selector: 'h3'
 		},
-		titleStyle: {
-			type: 'object',
-			default: {
-				color: 'black',
-				textAlign: 'left'
-			}
-		},
 		content: {
 			type: 'array',
 			source: 'children',
@@ -59,7 +50,13 @@ registerBlockType( 'gutencard/block-gutencard', {
 			type: 'object',
 			default: {
 				color: 'black',
-				textAlign: 'left'
+				textAlign: 'left',
+			}
+		},
+		backgroundStyle: {
+			type: 'object',
+			default: {
+				backgroundColor: 'white',
 			}
 		}
 	},
@@ -77,7 +74,7 @@ registerBlockType( 'gutencard/block-gutencard', {
 	 */
 	edit: ( props ) => {
 
-		let { attributes: { title, content, contentStyle }, setAttributes, className } = props;
+		let { attributes: { title, content, contentStyle, backgroundStyle }, setAttributes, className } = props;
 
 		const onChangeTitle = (newTitle) => {
 			setAttributes({ title: newTitle });
@@ -107,8 +104,18 @@ registerBlockType( 'gutencard/block-gutencard', {
 			});
 		};
 
+		const onChangeBackgroundColor = (newBgcolor) => {
+			let newBgcolorValue = (newBgcolor === undefined) ? 'none' : newBgcolor;
+			setAttributes({
+				backgroundStyle: {
+					backgroundColor: newBgcolorValue,
+					textAlign: backgroundStyle.textAlign
+				}
+			});
+		};
+
 		return (
-			<div className={className}>
+			<div className={className} style={backgroundStyle}>
 				{
 					<BlockControls>
 						<AlignmentToolbar
@@ -120,34 +127,40 @@ registerBlockType( 'gutencard/block-gutencard', {
 				{
 					<Fragment>
 						<InspectorControls className={className}>
-							<Panel header="Gutencard Settings">
-								<PanelBody title="Text Settings" initialOpen={true}>
+							<Panel>
+								<PanelBody title="Color Settings" initialOpen={false}>
 									<PanelRow>Choose a text color.</PanelRow>
 									<ColorPalette
 										onChange={onChangeTextColor}
+									/>
+									<PanelRow>Choose a background color.</PanelRow>
+									<ColorPalette
+										onChange={onChangeBackgroundColor}
 									/>
 								</PanelBody>
 							</Panel>
 						</InspectorControls>
 					</Fragment>
 				}
-				<div className="card-content">
-					<RichText
-						className="heading"
-						tagName="h3"
-						style={contentStyle}
-						onChange={onChangeTitle}
-						placeholder="Your card title"
-						value={title}
-					/>
-					<RichText
-						tagName="p"
-						style={contentStyle}
-						onChange={onChangeContent}
-						placeholder="Your card content"
-						value={content}
-					/>
-				</div>
+				{
+					<div className="card-content">
+						<RichText
+							className="heading"
+							tagName="h3"
+							style={contentStyle}
+							onChange={onChangeTitle}
+							placeholder="Your card title"
+							value={title}
+						/>
+						<RichText
+							tagName="p"
+							style={contentStyle}
+							onChange={onChangeContent}
+							placeholder="Your card content"
+							value={content}
+						/>
+					</div>
+				}
 			</div>
 		);
 	},
@@ -155,9 +168,9 @@ registerBlockType( 'gutencard/block-gutencard', {
 
 		return (
 
-			<div className="card">
+			<div className="card" style={props.attributes.backgroundStyle}>
 
-				<div className="card-content" >
+				<div className="card-content">
 					<div className="card-title">
 						<RichText.Content style={props.attributes.contentStyle} tagName="h3" value={props.attributes.title} />
 					</div>
@@ -165,6 +178,7 @@ registerBlockType( 'gutencard/block-gutencard', {
 						<RichText.Content style={props.attributes.contentStyle} tagName="p" value={props.attributes.content} />
 					</div>
 				</div>
+
 			</div>
 
 		);
