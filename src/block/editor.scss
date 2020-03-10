@@ -1,15 +1,40 @@
-/**
- * #.# Editor Styles
- *
- * CSS for just Backend enqueued after style.scss
- * which makes it higher in priority.
- */
+//--------------------------------------------------------------
+// EDITOR STYLES
+// CSS for just Backend enqueued after style.scss
+//--------------------------------------------------------------
 
-.wp-block-cgb-block-gutencard  {
-  background: $green;
-  border: 0.2rem solid $black;
-  color: $black;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem;
-}
+.wp-block {
+
+	.button-container {
+		background: $color-black;
+		border: rem(1) solid $color-dove-gray;
+		border-radius: rem(2);
+		margin: 0 0 rem(10) 0;
+		padding: 22% 0;
+		text-align: center;
+	} // .button-container
+
+	.wp-block-gutencard-block-gutencard {
+		background-color: $color-white;
+		border: 1px solid $color-blue;
+		color: $color-white;
+		padding: rem(10);
+
+		.image {
+			height: auto;
+			max-height: rem(500);
+			object-fit: cover;
+			width: 100%;
+		} // .image
+
+		.heading {
+			margin: 0 0 rem(30);
+			padding: rem(5);
+		} // .heading
+
+		.rich-text {
+			padding: rem(10) 0;
+		} // .rich-text
+	} // .wp-block-gutencard-block-gutencard
+
+} // .wp-block

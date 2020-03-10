@@ -12,6 +12,8 @@ import './style.scss';
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
 const { RichText, MediaUpload, PlainText, BlockControls, AlignmentToolbar, InspectorControls, ColorPalette } = wp.editor;
+const { Fragment } = wp.element;
+const { TextControl, ToggleControl, Panel, PanelBody, PanelRow } = wp.components;
 
 /**
  * Register: aa Gutenberg Block.
@@ -29,7 +31,7 @@ const { RichText, MediaUpload, PlainText, BlockControls, AlignmentToolbar, Inspe
 registerBlockType( 'gutencard/block-gutencard', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
 	title: __( 'Gutencard' ), // Block title.
-	icon: { background: '#2F313A', foreground: '#DEBB8F', src: 'smiley' },
+	icon: { background: '#000', foreground: '#F38A8A', src: 'buddicons-activity' },
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
 		__( 'gutencard' ),
@@ -37,8 +39,16 @@ registerBlockType( 'gutencard/block-gutencard', {
 	],
 	attributes: {
 		title: {
-			source: 'text',
-			selector: '.card-title'
+			type: 'array',
+			source: 'children',
+			selector: 'h3'
+		},
+		titleStyle: {
+			type: 'object',
+			default: {
+				color: 'black',
+				textAlign: 'left'
+			}
 		},
 		content: {
 			type: 'array',
@@ -51,14 +61,6 @@ registerBlockType( 'gutencard/block-gutencard', {
 				color: 'black',
 				textAlign: 'left'
 			}
-		},
-		imageAlt: {
-			attribute: 'alt',
-			selector: '.card-image'
-		},
-		imageUrl: {
-			attribute: 'src',
-			selector: '.card-image'
 		}
 	},
 
@@ -75,12 +77,15 @@ registerBlockType( 'gutencard/block-gutencard', {
 	 */
 	edit: ( props ) => {
 
-		let { attributes: { content, contentStyle }, setAttributes, className } = props;
+		let { attributes: { title, content, contentStyle }, setAttributes, className } = props;
+
+		const onChangeTitle = (newTitle) => {
+			setAttributes({ title: newTitle });
+		};
 
 		const onChangeContent = (newContent) => {
 			setAttributes({ content: newContent });
 		};
-
 
 		const onChangeAlignment = (newAlignment) => {
 			let alignmentValue = (newAlignment === undefined) ? 'none' : newAlignment;
@@ -103,7 +108,7 @@ registerBlockType( 'gutencard/block-gutencard', {
 		};
 
 		return (
-			<div>
+			<div className={className}>
 				{
 					<BlockControls>
 						<AlignmentToolbar
@@ -113,29 +118,52 @@ registerBlockType( 'gutencard/block-gutencard', {
 					</BlockControls>
 				}
 				{
-					<InspectorControls>
-						<ColorPalette // Element Tag for Gutenberg standard colour selector
-							onChange={onChangeTextColor} // onChange event callback
-						/>
-					</InspectorControls>
+					<Fragment>
+						<InspectorControls className={className}>
+							<Panel header="Gutencard Settings">
+								<PanelBody title="Text Settings" initialOpen={true}>
+									<PanelRow>Choose a text color.</PanelRow>
+									<ColorPalette
+										onChange={onChangeTextColor}
+									/>
+								</PanelBody>
+							</Panel>
+						</InspectorControls>
+					</Fragment>
 				}
-				<RichText
-					tagName="p"
-					style={contentStyle}
-					className={className}
-					onChange={onChangeContent}
-					value={content}
-				/>
+				<div className="card-content" style={props.attributes.contentStyle}>
+					<RichText
+						className="heading"
+						tagName="h3"
+						onChange={onChangeTitle}
+						value={title}
+					/>
+					<RichText
+						tagName="p"
+						style={contentStyle}
+						onChange={onChangeContent}
+						value={content}
+					/>
+				</div>
 			</div>
 		);
 	},
 	save: (props) => {
 
 		return (
+
 			<div className="card">
 
-				<RichText.Content style={props.attributes.contentStyle} tagName="p" value={props.attributes.content} />
+				<div className="card-content" >
+					<div className="card-title">
+						<RichText.Content tagName="h3" value={props.attributes.title} />
+					</div>
+					<div className="card-body">
+						<RichText.Content tagName="p" value={props.attributes.content} />
+					</div>
+				</div>
 			</div>
+
 		);
 	}
 });

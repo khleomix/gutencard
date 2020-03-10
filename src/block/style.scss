@@ -1,14 +1,19 @@
-/**
- * #.# Styles
- *
- * CSS for both Frontend+Backend.
- */
+//--------------------------------------------------------------
+// STYLES
+// CSS for both Frontend+Backend.
+//--------------------------------------------------------------
 
-.wp-block-cgb-block-gutencard  {
-  background: $red;
-  border: 0.2rem solid $black;
-  color: $black;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem;
-}
+.wp-block-gutencard-block-gutencard  {
+	background: $color-white;
+	border: rem(10) solid $color-black;
+	color: $color-black;
+	margin: 0 auto;
+	max-width: rem(740);
+	padding: rem(20);
+
+	.card-title {
+		h3 {
+			margin: rem(10) 0 rem(30);
+		}
+	} // .card-title
+} // .wp-block-gutencard-block-gutencard
