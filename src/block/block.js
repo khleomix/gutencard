@@ -131,17 +131,20 @@ registerBlockType( 'gutencard/block-gutencard', {
 						</InspectorControls>
 					</Fragment>
 				}
-				<div className="card-content" style={props.attributes.contentStyle}>
+				<div className="card-content">
 					<RichText
 						className="heading"
 						tagName="h3"
+						style={contentStyle}
 						onChange={onChangeTitle}
+						placeholder="Your card title"
 						value={title}
 					/>
 					<RichText
 						tagName="p"
 						style={contentStyle}
 						onChange={onChangeContent}
+						placeholder="Your card content"
 						value={content}
 					/>
 				</div>
@@ -156,10 +159,10 @@ registerBlockType( 'gutencard/block-gutencard', {
 
 				<div className="card-content" >
 					<div className="card-title">
-						<RichText.Content tagName="h3" value={props.attributes.title} />
+						<RichText.Content style={props.attributes.contentStyle} tagName="h3" value={props.attributes.title} />
 					</div>
 					<div className="card-body">
-						<RichText.Content tagName="p" value={props.attributes.content} />
+						<RichText.Content style={props.attributes.contentStyle} tagName="p" value={props.attributes.content} />
 					</div>
 				</div>
 			</div>
