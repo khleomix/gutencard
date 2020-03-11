@@ -12,7 +12,7 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
 const { RichText, BlockControls, AlignmentToolbar, InspectorControls, ColorPalette, MediaUpload, MediaUploadCheck } = wp.blockEditor;
 const { Fragment } = wp.element;
-const { Panel, PanelBody, PanelRow, Button } = wp.components;
+const { Panel, PanelBody, PanelRow, Button, ResponsiveWrapper } = wp.components;
 
 const ALLOWED_MEDIA_TYPES = ['image'];
 
@@ -187,14 +187,6 @@ registerBlockType( 'gutencard/block-gutencard', {
 							<ColorPalette
 								onChange={onChangeBackgroundColor}
 							/>
-						</PanelBody>
-						<PanelBody
-							title={__('Background Settings')}
-							initialOpen={true}
-						>
-							<div className="wp-block-gutenberg-image">
-								Our image selector goes here
-                        </div>
 						</PanelBody>
 					</Panel>
 				</InspectorControls>
