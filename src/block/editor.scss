@@ -3,8 +3,37 @@
 // CSS for just Backend enqueued after style.scss
 //--------------------------------------------------------------
 
+[data-type='gutencard/block-gutencard'] {
+
+	&[data-align='full'] {
+		.card-image {
+			max-height: rem(600);
+			overflow: hidden;
+		} // .card-image
+	} // &[data-align='full']
+
+	&[data-align='full'] {
+		.card-image {
+			max-height: rem(750);
+			overflow: hidden;
+		} // .card-image
+	} // &[data-align='full']
+} // [data-type='gutencard/block-gutencard']
+
 .wp-block-gutencard-block-gutencard {
 	border: rem(1) solid $color-dove-gray;
+
+	.gutencard-title {
+		background-color: $color-black;
+		text-align: center;
+		text-transform: uppercase;
+
+		h2 {
+			color: $color-white;
+			font-size: rem(20);
+			margin: rem(10) auto;
+		}
+	} // .gutencard-title
 
 	.button {
 		background: $color-black;

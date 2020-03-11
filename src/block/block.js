@@ -35,6 +35,9 @@ registerBlockType( 'gutencard/block-gutencard', {
 		__( 'gutencard' ),
 		__( 'custom card block' ),
 	],
+	supports: {
+		align: ['full', 'wide'],
+	},
 	attributes: {
 		title: {
 			type: 'array',
@@ -165,6 +168,9 @@ registerBlockType( 'gutencard/block-gutencard', {
 			</Fragment>,
 
 			<div className={className} style={backgroundStyle}>
+				<div class="gutencard-title">
+					<h2>Gutencard Block</h2>
+				</div>
 				<div className="card-image">
 					<MediaUpload
 						onSelect={media => { setAttributes({ imageAlt: media.alt, imageUrl: media.url }); }}

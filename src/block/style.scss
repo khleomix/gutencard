@@ -8,16 +8,36 @@
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
-	max-width: rem(740);
+
+	&.alignfull {
+
+		.card-image {
+			max-height: rem(600);
+			overflow: hidden;
+		} // .card-image
+
+	} // &.alignfull
+
+	&.alignwide {
+
+		.card-image {
+			max-height: rem(750);
+			overflow: hidden;
+		} // .card-image
+
+	} // &.alignwide
 
 	.card-image {
+		align-items: center;
+		display: flex;
+		justify-content: center;
 
-		img {
-			height: 100%;
+		.featured-image {
+			height: auto;
 			object-fit: cover;
 			object-position: center;
 			width: 100%;
-		} // img
+		} // .featured-image
 
 	} // .card-image
 
