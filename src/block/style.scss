@@ -4,14 +4,41 @@
 //--------------------------------------------------------------
 
 .wp-block-gutencard-block-gutencard  {
-	background: $color-white;
+	background-color: transparent;
+	display: flex;
+	flex-direction: column;
 	margin: 0 auto;
 	max-width: rem(740);
-	padding: rem(20);
 
-	.card-title {
-		h3 {
-			margin: rem(10) 0 rem(30);
-		}
-	} // .card-title
+	.card-image {
+
+		img {
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+			width: 100%;
+		} // img
+
+	} // .card-image
+
+	.card-content {
+		flex: 1;
+		padding: rem(20);
+
+		.card-title {
+			h3 {
+				margin: rem(10) 0 rem(30);
+			}
+		} // .card-title
+
+		.card-description {
+
+			p {
+				padding: rem(10) 0;
+			}
+
+		} // .card-description
+
+	} // .card-content
+
 } // .wp-block-gutencard-block-gutencard

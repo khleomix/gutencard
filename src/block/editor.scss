@@ -3,35 +3,20 @@
 // CSS for just Backend enqueued after style.scss
 //--------------------------------------------------------------
 
-.wp-block {
+.wp-block-gutencard-block-gutencard {
+	border: rem(1) solid $color-dove-gray;
 
-	.button-container {
+	.button {
 		background: $color-black;
 		border: rem(1) solid $color-dove-gray;
 		border-radius: rem(2);
-		margin: 0 0 rem(10) 0;
-		padding: 22% 0;
+		color: $color-white;
+		display: block;
+		margin: rem(10) auto;
+		min-width: rem(300);
+		padding: rem(10) rem(20);
 		text-align: center;
+		text-transform: uppercase;
 	} // .button-container
 
-	.wp-block-gutencard-block-gutencard {
-		background: $color-white;
-
-		.image {
-			height: auto;
-			max-height: rem(500);
-			object-fit: cover;
-			width: 100%;
-		} // .image
-
-		.heading {
-			margin: 0 0 rem(30);
-			padding: rem(5);
-		} // .heading
-
-		.rich-text {
-			padding: rem(10) 0;
-		} // .rich-text
-	} // .wp-block-gutencard-block-gutencard
-
-} // .wp-block
+} // .wp-block-gutencard-block-gutencard
