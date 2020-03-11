@@ -10,9 +10,11 @@ import './style.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
-const { RichText, BlockControls, AlignmentToolbar, InspectorControls, ColorPalette, MediaUpload } = wp.editor;
+const { RichText, BlockControls, AlignmentToolbar, InspectorControls, ColorPalette, MediaUpload, MediaUploadCheck } = wp.blockEditor;
 const { Fragment } = wp.element;
 const { Panel, PanelBody, PanelRow, Button } = wp.components;
+
+const ALLOWED_MEDIA_TYPES = ['image'];
 
 /**
  * Register: a Gutenberg Block.
@@ -29,7 +31,7 @@ const { Panel, PanelBody, PanelRow, Button } = wp.components;
  */
 registerBlockType( 'gutencard/block-gutencard', {
 	title: __( 'Gutencard' ),
-	icon: { background: '#000', foreground: '#F38A8A', src: 'buddicons-activity' },
+	icon: { background: '#8a2387', foreground: '#fff9c0', src: 'buddicons-activity' },
 	category: 'common',
 	keywords: [
 		__( 'gutencard' ),
@@ -66,6 +68,9 @@ registerBlockType( 'gutencard/block-gutencard', {
 		imageUrl: {
 			attribute: 'src',
 			selector: '.featured-image'
+		},
+		imageId: {
+			type: 'number',
 		}
 	},
 
@@ -82,9 +87,9 @@ registerBlockType( 'gutencard/block-gutencard', {
 	 */
 	edit: ( props ) => {
 
-		let { attributes: { title, content, contentStyle, backgroundStyle, imageUrl, imageID }, setAttributes, className } = props;
+		let { attributes: { title, content, contentStyle, backgroundStyle, image, imageUrl, imageId }, setAttributes, className } = props;
 
-		const getImageButton = (openEvent) => {
+		const onSelectImage = (openEvent) => {
 			if (imageUrl) {
 				return (
 					<img
@@ -97,10 +102,28 @@ registerBlockType( 'gutencard/block-gutencard', {
 			else {
 				return (
 					<div className="button-container">
-						<Button onClick={openEvent} className="button button-large">Choose an image</Button>
+						<Button
+							className={!imageId ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
+							onClick={openEvent}>
+							{!imageId && (__('Set featured image', 'gutenberg'))}
+							{!!imageId && imageUrl &&
+								<ResponsiveWrapper
+									naturalWidth={image.media_details.width}
+									naturalHeight={image.media_details.height}
+								>
+									<img src={image.source_url} alt={__('Featured Image', 'gutenberg')} />
+								</ResponsiveWrapper>
+							}
+						</Button>
 					</div>
 				);
 			}
+		};
+
+		const onRemoveImage = () => {
+			setAttributes({
+				imageUrl: null
+			});
 		};
 
 		const onChangeTitle = (newTitle) => {
@@ -136,7 +159,6 @@ registerBlockType( 'gutencard/block-gutencard', {
 			setAttributes({
 				backgroundStyle: {
 					backgroundColor: newBgcolorValue,
-					textAlign: backgroundStyle.textAlign
 				}
 			});
 		};
@@ -153,7 +175,10 @@ registerBlockType( 'gutencard/block-gutencard', {
 			<Fragment>
 				<InspectorControls className={className}>
 					<Panel>
-						<PanelBody title="Color Settings" initialOpen={false}>
+						<PanelBody
+							title={__('Color Settings')}
+							initialOpen={true}
+						>
 							<PanelRow>Choose a text color.</PanelRow>
 							<ColorPalette
 								onChange={onChangeTextColor}
@@ -162,6 +187,14 @@ registerBlockType( 'gutencard/block-gutencard', {
 							<ColorPalette
 								onChange={onChangeBackgroundColor}
 							/>
+						</PanelBody>
+						<PanelBody
+							title={__('Background Settings')}
+							initialOpen={true}
+						>
+							<div className="wp-block-gutenberg-image">
+								Our image selector goes here
+                        </div>
 						</PanelBody>
 					</Panel>
 				</InspectorControls>
@@ -172,12 +205,22 @@ registerBlockType( 'gutencard/block-gutencard', {
 					<h2>Gutencard Block</h2>
 				</div>
 				<div className="card-image">
-					<MediaUpload
-						onSelect={media => { setAttributes({ imageAlt: media.alt, imageUrl: media.url }); }}
-						type="image"
-						value={imageID}
-						render={({ open }) => getImageButton(open)}
-					/>
+					<MediaUploadCheck>
+						<MediaUpload
+							onSelect={media => { setAttributes({ imageAlt: media.alt, imageUrl: media.sizes.large.url }); }}
+							allowedTypes={ALLOWED_MEDIA_TYPES}
+							type="image"
+							value={imageId}
+							render={({ open }) => onSelectImage(open)}
+						/>
+					</MediaUploadCheck>
+					{!!imageUrl &&
+						<MediaUploadCheck>
+							<Button className="button" onClick={onRemoveImage} isLink isDestructive>
+								{__('Remove', 'gutenberg')}
+							</Button>
+						</MediaUploadCheck>
+					}
 				</div>
 				<div className="card-content">
 					<div className="card-title">

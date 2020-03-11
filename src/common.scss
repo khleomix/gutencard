@@ -17,6 +17,9 @@ $color-black:        #000;
 $color-blue:         #20739a;
 $color-light-yellow: #fff9c0;
 $color-white:        #fff;
+$color-tango:        #f27121;
+$color-amaranth:     #e94057;
+$color-plum:         #8a2387;
 
 //-----------------------------------------
 // Grayscale Colors
@@ -33,6 +36,7 @@ $color-silver:         #ccc;
 $color-tundora:        #454545;
 $color-whitesmoke:     #f1f1f1;
 
+$gradient-bg: linear-gradient(to right, $color-tango, $color-amaranth, $color-plum);
 
 //--------------------------------------------------------------
 // MIXINS
