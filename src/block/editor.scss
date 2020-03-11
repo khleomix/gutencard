@@ -131,6 +131,11 @@
 		display: flex;
 		flex-direction: column;
 		position: relative;
+
+		img {
+			object-fit: cover;
+			width: 100%;
+		}
 	} // .card-image
 
 } // .wp-block-gutencard-block-gutencard
