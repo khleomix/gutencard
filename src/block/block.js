@@ -208,9 +208,11 @@ registerBlockType( 'gutencard/block-gutencard', {
 					</MediaUploadCheck>
 					{!!imageUrl &&
 						<MediaUploadCheck>
-							<Button className="button" onClick={onRemoveImage} isLink isDestructive>
-								{__('Remove', 'gutenberg')}
-							</Button>
+							<div className="button-container">
+								<Button className="button" onClick={onRemoveImage} isLink isDestructive>
+									{__('Remove', 'gutenberg')}
+								</Button>
+							</div>
 						</MediaUploadCheck>
 					}
 				</div>

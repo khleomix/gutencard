@@ -64,67 +64,6 @@
 		text-align: center;
 		text-decoration: none;
 		text-transform: uppercase;
-
-		&.is-destructive {
-			background: none;
-			border: 0;
-			box-sizing: border-box;
-			color: transparent;
-			cursor: pointer;
-			font-family: 'Josefin Sans', sans-serif;
-			font-size: rem(18);
-			left: 50%;
-			letter-spacing: rem(1.5);
-			line-height: 90px;
-			outline: none;
-			overflow: hidden;
-			padding: rem(10) 0 0;
-			position: absolute;
-			text-transform: uppercase;
-			top: 50%;
-			transform: translate(-50%, -50%);
-			transition: 0.2s ease-in;
-			width: rem(100);
-
-			&::before,
-			&::after {
-				background: $gradient-bg;
-				content: '';
-				display: block;
-				height: rem(1);
-				left: 0;
-				position: absolute;
-				transform-origin: center left;
-				transition: 0.2s ease-in;
-				width: rem(141.4214);
-				z-index: -1;
-			} // // &::before, &::after
-
-			&::before {
-				top: 0;
-				transform: rotate(45deg);
-			} // &::before
-
-			&::after {
-				bottom: 0;
-				transform: rotate(-45deg);
-			} // &::after
-
-			&.is-link {
-
-				&:hover {
-					color: $color-white;
-
-					&::before,
-					&::after {
-						height: rem(50);
-						transform: rotate(0deg);
-					} // &::before, &::after
-
-				} // &:hover
-
-			} // .is-link
-		} // .is-destructive
 	} // .button
 
 	.card-image {
@@ -136,6 +75,81 @@
 			object-fit: cover;
 			width: 100%;
 		}
+
+		.button-container {
+			height: 100%;
+			position: absolute;
+			width: 100%;
+
+			.button {
+
+				&.is-destructive {
+					background: none;
+					border: 0;
+					box-sizing: border-box;
+					color: transparent;
+					cursor: pointer;
+					display: inline-block;
+					font-family: 'Josefin Sans', sans-serif;
+					font-size: rem(18);
+					left: 50%;
+					letter-spacing: rem(1.5);
+					line-height: 90px;
+					min-width: unset;
+					outline: none;
+					overflow: hidden;
+					padding: rem(10) 0 0;
+					position: absolute;
+					text-transform: uppercase;
+					top: 50%;
+					transform: translate(-50%, -50%);
+					transition: 0.2s ease-in;
+					width: rem(100);
+
+					&::before,
+					&::after {
+						background: $gradient-bg;
+						content: '';
+						display: block;
+						height: rem(1);
+						left: 0;
+						position: absolute;
+						transform-origin: center left;
+						transition: 0.2s ease-in;
+						width: rem(141.4214);
+						z-index: -1;
+					} // // &::before, &::after
+
+					&::before {
+						top: 0;
+						transform: rotate(45deg);
+					} // &::before
+
+					&::after {
+						bottom: 0;
+						transform: rotate(-45deg);
+					} // &::after
+
+					&.is-link {
+
+						&:hover,
+						&:active,
+						&:focus {
+							color: $color-white;
+							outline: none;
+
+							&::before,
+							&::after {
+								height: rem(50);
+								transform: rotate(0deg);
+							} // &::before, &::after
+
+						} // &:hover, &:active, &:focus
+
+					} // .is-link
+				} // .is-destructive
+			} // .button
+		} // .button-container
 	} // .card-image
 
 } // .wp-block-gutencard-block-gutencard
