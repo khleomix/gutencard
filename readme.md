@@ -30,7 +30,7 @@ Features optional featured image, title and description fields. Text color as we
 4. The block can be set to full-width or wide-width when needed.
 5. Text alignment can also be changed, alignment will be the same for both title and description.
 
-### Setup ###
+## Setup ##
 1. Clone the repo `https://github.com/khleomix/gutencard` `develop` branch to the `/wp-contents/plugins/`directory run `git clone -b develop git@github.com:khleomix/gutencard.git`
 2. Navigate to the plugin directory, run `cd gutencard`
 3. Install NPM: `npm install`
