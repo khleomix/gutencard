@@ -1,0 +1,116 @@
+[data-type='gutencard/block-gutencard'][data-align='full'] .card-image {
+  max-height: 37.5rem;
+  overflow: hidden; }
+
+[data-type='gutencard/block-gutencard'][data-align='full'] .card-image {
+  max-height: 46.875rem;
+  overflow: hidden; }
+
+.wp-block-gutencard-block-gutencard {
+  border: 0.0625rem solid #666; }
+  .wp-block-gutencard-block-gutencard .gutencard-title {
+    background: -webkit-gradient(linear, left top, right top, from(#f27121), color-stop(#e94057), to(#8a2387));
+    background: -webkit-linear-gradient(left, #f27121, #e94057, #8a2387);
+    background: -o-linear-gradient(left, #f27121, #e94057, #8a2387);
+    background: linear-gradient(to right, #f27121, #e94057, #8a2387);
+    text-align: center;
+    text-transform: uppercase; }
+    .wp-block-gutencard-block-gutencard .gutencard-title h2 {
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 0.0625rem;
+      margin: 0.625rem auto; }
+  .wp-block-gutencard-block-gutencard .button-container {
+    width: 100%; }
+    .wp-block-gutencard-block-gutencard .button-container .components-button {
+      background: #fff;
+      border-radius: 0;
+      color: #000;
+      display: block;
+      margin: 0 auto 0.625rem;
+      min-width: 100%;
+      padding: 0.625rem 1.25rem;
+      text-align: center;
+      text-transform: uppercase; }
+  .wp-block-gutencard-block-gutencard .button {
+    background: #000;
+    border-radius: 0.625rem;
+    clear: both;
+    color: #fff;
+    display: block;
+    margin: 0.625rem auto;
+    padding: 0.625rem 1.25rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase; }
+    .wp-block-gutencard-block-gutencard .button.is-destructive {
+      background: none;
+      border: 0;
+      -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+      color: transparent;
+      cursor: pointer;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 1.125rem;
+      left: 50%;
+      letter-spacing: 0.09375rem;
+      line-height: 90px;
+      outline: none;
+      overflow: hidden;
+      padding: 0.625rem 0 0;
+      position: absolute;
+      text-transform: uppercase;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+      -webkit-transition: 0.2s ease-in;
+      -o-transition: 0.2s ease-in;
+      transition: 0.2s ease-in;
+      width: 6.25rem; }
+      .wp-block-gutencard-block-gutencard .button.is-destructive::before, .wp-block-gutencard-block-gutencard .button.is-destructive::after {
+        background: -webkit-gradient(linear, left top, right top, from(#f27121), color-stop(#e94057), to(#8a2387));
+        background: -webkit-linear-gradient(left, #f27121, #e94057, #8a2387);
+        background: -o-linear-gradient(left, #f27121, #e94057, #8a2387);
+        background: linear-gradient(to right, #f27121, #e94057, #8a2387);
+        content: '';
+        display: block;
+        height: 0.0625rem;
+        left: 0;
+        position: absolute;
+        -webkit-transform-origin: center left;
+            -ms-transform-origin: center left;
+                transform-origin: center left;
+        -webkit-transition: 0.2s ease-in;
+        -o-transition: 0.2s ease-in;
+        transition: 0.2s ease-in;
+        width: 8.83884rem;
+        z-index: -1; }
+      .wp-block-gutencard-block-gutencard .button.is-destructive::before {
+        top: 0;
+        -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+                transform: rotate(45deg); }
+      .wp-block-gutencard-block-gutencard .button.is-destructive::after {
+        bottom: 0;
+        -webkit-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+                transform: rotate(-45deg); }
+      .wp-block-gutencard-block-gutencard .button.is-destructive.is-link:hover {
+        color: #fff; }
+        .wp-block-gutencard-block-gutencard .button.is-destructive.is-link:hover::before, .wp-block-gutencard-block-gutencard .button.is-destructive.is-link:hover::after {
+          height: 3.125rem;
+          -webkit-transform: rotate(0deg);
+              -ms-transform: rotate(0deg);
+                  transform: rotate(0deg); }
+  .wp-block-gutencard-block-gutencard .card-image {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    position: relative; }
+    .wp-block-gutencard-block-gutencard .card-image img {
+      -o-object-fit: cover;
+         object-fit: cover;
+      width: 100%; }
