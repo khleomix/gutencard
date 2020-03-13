@@ -2,7 +2,7 @@
 
 **Contributors:**      JC Palmes
 
-**Tags:**              guteberg, custom card block
+**Tags:**              gutenberg, custom card block
 
 **Requires at least:** 4.4
 
