@@ -64,17 +64,18 @@ registerBlockType( 'gutencard/block-gutencard', {
 		},
 		imageAlt: {
 			attribute: 'alt',
-			selector: '.featured-image'
+			selector: '.featured-image',
 		},
 		imageUrl: {
 			attribute: 'src',
-			selector: '.featured-image'
+			selector: '.featured-image',
 		},
 		imageId: {
 			type: 'number',
 		},
 		displayValue: {
 			type: 'string',
+			default: 'column',
 		}
 	},
 
@@ -171,9 +172,8 @@ registerBlockType( 'gutencard/block-gutencard', {
 		};
 
 		const onChangeDisplay = (newDisplay) => {
-			let newDisplayValue = (newDisplay === undefined) ? 'column' : newDisplay;
 			setAttributes({
-				displayValue:  newDisplayValue,
+				displayValue: newDisplay,
 			});
 		}
 
