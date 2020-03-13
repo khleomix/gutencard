@@ -8,17 +8,20 @@
 import './editor.scss';
 import './style.scss';
 
+// Import Icons.
+import icons from './icons/icons.js'
+
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
 const { RichText, BlockControls, AlignmentToolbar, InspectorControls, ColorPalette, MediaUpload, MediaUploadCheck } = wp.blockEditor;
 const { Fragment } = wp.element;
 const { Panel, PanelBody, PanelRow, Button, ResponsiveWrapper, RadioControl } = wp.components;
-const { withState } = wp.compose;
 
 const ALLOWED_MEDIA_TYPES = ['image'];
 
+
 /**
- * Register: a Gutenberg Block.
+ * Register: Gutencard Block.
  *
  * Registers a new block provided a unique name and an object defining its
  * behavior. Once registered, the block is made editor as an option to any
@@ -32,7 +35,7 @@ const ALLOWED_MEDIA_TYPES = ['image'];
  */
 registerBlockType( 'gutencard/block-gutencard', {
 	title: __( 'Gutencard' ),
-	icon: { background: '#8a2387', foreground: '#fff9c0', src: 'buddicons-activity' },
+	icon: { background: '#11acee', src: icons.gutencard },
 	category: 'common',
 	keywords: [
 		__( 'gutencard' ),
