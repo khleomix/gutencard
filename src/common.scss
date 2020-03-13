@@ -2,7 +2,9 @@
 //   COLOR VARIABLES
 //     - Primary Colors
 //     - Grayscale Colors
+//     - Breakpoints
 //   MIXINS
+//     - Media Query
 //     - Convert PX to REM
 //--------------------------------------------------------------
 
@@ -42,9 +44,120 @@ $color-whitesmoke:     #f1f1f1;
 $gradient-bg: linear-gradient(to right, $color-tango, $color-amaranth, $color-plum);
 $gradient-alt-bg: linear-gradient(to left, $color-tango, $color-amaranth, $color-plum);
 
+///-----------------------------------------
+// Breakpoints – Used for Media Query Mixins only. Note the px values!
+//-----------------------------------------
+/// Larger HD Desktops.
+$desktop-large: 1800px;
+
+/// Standard Desktops and Larger Laptops.
+$desktop: 1200px;
+
+/// Smaller Desktops and Standard iPad Tablet.
+$tablet-landscape: 900px;
+
+/// Smaller Tablets and Standard iPad Portrait.
+$tablet-portrait: 600px;
+
+/// Larger iPhones, ie: 8-11, X.
+$iphone: 375px;
+
+/// Phones Smaller Than 500px in Width.
+$phone: 300px;
+
 //--------------------------------------------------------------
 // MIXINS
 //--------------------------------------------------------------
+
+//--------------------------------------------------------------
+// Media Query Mixin
+//--------------------------------------------------------------
+
+////
+/// @group mixins
+/// @author jomurgel
+////
+
+/// Easy mixin for media queries
+///
+/// @param {string} $min min width for breakpoint. Can be null.
+/// @param {string} $max max width if applicable. Default null.
+/// @param {string} $media default 'screen'.
+/// @param {string} $orientation. default null. portrait, landscape, etc.
+///
+/// @example scss - Usage.
+/// @mixin media($tablet-portrait) {
+/// 	.test {}
+/// }
+///
+/// @example css - Output
+/// @media screen and (min-width: 600px) {
+/// 	.test {}
+/// }
+/// @example scss - Usage 2.
+/// @mixin media(null, $tablet-portrait) {
+/// 	.test {}
+/// }
+///
+/// @example css - Output 2
+/// @media screen and (max-width: 600px) {
+/// 	.test {}
+/// }
+/// @example scss - Usage 3.
+/// @mixin media($desktop, $tablet-portrait, all, portrait) {
+/// 	.test {}
+/// }
+///
+/// @example css - Output 3
+/// @media all and (min-width: 1200px) and (max-width: 600px) and (orientation: portrait) {
+/// 	.test {}
+/// }
+
+@mixin media($min, $max: null, $media: 'screen', $orientation: null) {
+
+	@if $orientation == null {
+
+		@if $max == null and $min != null {
+			@media #{$media} and (min-width: #{$min}) {
+				@content;
+			}
+		} @else if $min == null and $max != null {
+			@media #{$media} and (max-width: #{($max - 1)}) {
+				@content;
+			}
+		} @else if $min == null and $max == null {
+			@media #{$media} {
+				@content;
+			}
+		} @else {
+			@media #{$media} and (min-width: #{$min}) and (max-width: #{($max - 1)}) {
+				@content;
+			}
+		}
+
+	} @else {
+
+		@if $max == null and $min != null {
+			@media #{$media} and (min-width: #{$min}) and (orientation: #{$orientation}) {
+				@content;
+			}
+		} @else if $min == null and $max != null {
+			@media #{$media} and (max-width: #{($max - 1)}) and (orientation: #{$orientation}) {
+				@content;
+			}
+		} @else if $min == null and $max == null and $orientation == null {
+			@media #{$media} {
+				@content;
+			}
+		} @else {
+			@media #{$media} and (min-width: #{$min}) and (max-width: #{($max - 1)}) and (orientation: #{$orientation}) {
+				@content;
+			}
+		}
+	}
+}
+
+
 
 //-----------------------------------------
 // Convert PX to REM

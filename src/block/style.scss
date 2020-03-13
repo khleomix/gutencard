@@ -117,4 +117,29 @@
 
 	} // .card-content
 
+	@media all and (max-width: $iphone) {
+		&.row {
+			flex-direction: column;
+
+			.card-content {
+				padding: rem(30) 0;
+			} // .card-content
+		} // &.row
+
+		&.row-reverse {
+			flex-direction: column-reverse;
+
+			.card-content {
+				padding: rem(30) 0;
+			} // .card-content
+		} // &.row-reverse
+
+		.card-image {
+
+			img {
+				max-height: rem(500);
+			} // img
+		} // .card-image
+	} // max-width: $iphone
+
 } // .wp-block-gutencard-block-gutencard

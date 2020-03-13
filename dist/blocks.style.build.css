@@ -80,3 +80,16 @@
       margin: 0.625rem 0 1.875rem; }
     .wp-block-gutencard-block-gutencard .card-content .card-description p {
       padding: 0.625rem 0; }
+  @media all and (max-width: 375px) {
+    .wp-block-gutencard-block-gutencard.row {
+      -ms-flex-direction: column;
+          flex-direction: column; }
+      .wp-block-gutencard-block-gutencard.row .card-content {
+        padding: 1.875rem 0; }
+    .wp-block-gutencard-block-gutencard.row-reverse {
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse; }
+      .wp-block-gutencard-block-gutencard.row-reverse .card-content {
+        padding: 1.875rem 0; }
+    .wp-block-gutencard-block-gutencard .card-image img {
+      max-height: 31.25rem; } }
