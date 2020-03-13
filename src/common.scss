@@ -20,6 +20,9 @@ $color-white:        #fff;
 $color-tango:        #f27121;
 $color-amaranth:     #e94057;
 $color-plum:         #8a2387;
+$color-malibu:       #6e89ff;
+$color-royal-blue:   #4363ee;
+$color-cornflower:   #619aea;
 
 //-----------------------------------------
 // Grayscale Colors
@@ -37,6 +40,7 @@ $color-tundora:        #454545;
 $color-whitesmoke:     #f1f1f1;
 
 $gradient-bg: linear-gradient(to right, $color-tango, $color-amaranth, $color-plum);
+$gradient-alt-bg: linear-gradient(to left, $color-tango, $color-amaranth, $color-plum);
 
 //--------------------------------------------------------------
 // MIXINS

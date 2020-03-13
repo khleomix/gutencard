@@ -12,7 +12,8 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
 const { RichText, BlockControls, AlignmentToolbar, InspectorControls, ColorPalette, MediaUpload, MediaUploadCheck } = wp.blockEditor;
 const { Fragment } = wp.element;
-const { Panel, PanelBody, PanelRow, Button, ResponsiveWrapper } = wp.components;
+const { Panel, PanelBody, PanelRow, Button, ResponsiveWrapper, RadioControl } = wp.components;
+const { withState } = wp.compose;
 
 const ALLOWED_MEDIA_TYPES = ['image'];
 
@@ -44,7 +45,7 @@ registerBlockType( 'gutencard/block-gutencard', {
 		title: {
 			type: 'array',
 			source: 'children',
-			selector: 'h3'
+			selector: 'h3',
 		},
 		content: {
 			type: 'array',
@@ -59,7 +60,7 @@ registerBlockType( 'gutencard/block-gutencard', {
 			}
 		},
 		backgroundStyle: {
-			type: 'object'
+			type: 'object',
 		},
 		imageAlt: {
 			attribute: 'alt',
@@ -71,6 +72,9 @@ registerBlockType( 'gutencard/block-gutencard', {
 		},
 		imageId: {
 			type: 'number',
+		},
+		displayValue: {
+			type: 'string',
 		}
 	},
 
@@ -86,8 +90,7 @@ registerBlockType( 'gutencard/block-gutencard', {
 	 * @returns {Mixed} JSX Component.
 	 */
 	edit: ( props ) => {
-
-		let { attributes: { title, content, contentStyle, backgroundStyle, image, imageUrl, imageId }, setAttributes, className } = props;
+		let { attributes: { title, content, contentStyle, backgroundStyle, image, imageUrl, imageId, displayValue }, setAttributes, className } = props;
 
 		const onSelectImage = (openEvent) => {
 			if (imageUrl) {
@@ -103,15 +106,15 @@ registerBlockType( 'gutencard/block-gutencard', {
 				return (
 					<div className="button-container">
 						<Button
-							className={!imageId ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
-							onClick={openEvent}>
-							{!imageId && (__('Set featured image', 'gutenberg'))}
+							className = {!imageId ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
+							onClick = {openEvent}>
+							{!imageId && (__( 'Set featured image', 'gutencard' ))}
 							{!!imageId && imageUrl &&
 								<ResponsiveWrapper
-									naturalWidth={image.media_details.width}
-									naturalHeight={image.media_details.height}
+									naturalWidth = {image.media_details.width}
+									naturalHeight = {image.media_details.height}
 								>
-									<img src={image.source_url} alt={__('Featured Image', 'gutenberg')} />
+									<img src={image.source_url} alt={__( 'Featured Image', 'gutencard' )} />
 								</ResponsiveWrapper>
 							}
 						</Button>
@@ -122,16 +125,20 @@ registerBlockType( 'gutencard/block-gutencard', {
 
 		const onRemoveImage = () => {
 			setAttributes({
-				imageUrl: null
+				imageUrl: null,
 			});
 		};
 
 		const onChangeTitle = (newTitle) => {
-			setAttributes({ title: newTitle });
+			setAttributes({
+				title: newTitle,
+			});
 		};
 
 		const onChangeContent = (newContent) => {
-			setAttributes({ content: newContent });
+			setAttributes({
+				content: newContent,
+			});
 		};
 
 		const onChangeAlignment = (newAlignment) => {
@@ -139,7 +146,7 @@ registerBlockType( 'gutencard/block-gutencard', {
 			setAttributes({
 				contentStyle: {
 					color: contentStyle.color,
-					textAlign: alignmentValue
+					textAlign: alignmentValue,
 				}
 			});
 		};
@@ -149,7 +156,7 @@ registerBlockType( 'gutencard/block-gutencard', {
 			setAttributes({
 				contentStyle: {
 					color: newColorValue,
-					textAlign: contentStyle.textAlign
+					textAlign: contentStyle.textAlign,
 				}
 			});
 		};
@@ -163,54 +170,78 @@ registerBlockType( 'gutencard/block-gutencard', {
 			});
 		};
 
+		const onChangeDisplay = (newDisplay) => {
+			let newDisplayValue = (newDisplay === undefined) ? 'column' : newDisplay;
+			setAttributes({
+				displayValue:  newDisplayValue,
+			});
+		}
+
 		return [
 
 			<BlockControls>
 				<AlignmentToolbar
-					value={contentStyle.textAlign}
-					onChange={onChangeAlignment}
+					value = {contentStyle.textAlign}
+					onChange = {onChangeAlignment}
 				/>
 			</BlockControls>,
 
 			<Fragment>
-				<InspectorControls className={className}>
-					<Panel>
+				<InspectorControls>
+					<Panel className={className}>
 						<PanelBody
-							title={__('Color Settings')}
-							initialOpen={true}
+							title = {__( 'Color Settings', 'gutencard' )}
+							initialOpen = {true}
 						>
 							<PanelRow>Choose a text color.</PanelRow>
 							<ColorPalette
-								onChange={onChangeTextColor}
+								onChange = {onChangeTextColor}
 							/>
 							<PanelRow>Choose a background color.</PanelRow>
 							<ColorPalette
-								onChange={onChangeBackgroundColor}
+								onChange = {onChangeBackgroundColor}
 							/>
+						</PanelBody>
+						<PanelBody
+							title = {__( 'Display Settings', 'gutencard' )}
+							initialOpen = {false}
+						>
+							<RadioControl
+								label = {__( 'Choose Card Layout', 'gutencard' )}
+								selected = {displayValue}
+								options = {[
+									{ label: 'Column', value: 'column' },
+									{ label: 'Column Reverse', value: 'column-reverse' },
+									{ label: 'Row', value: 'row' },
+									{ label: 'Row Reverse', value: 'row-reverse' },
+								]}
+								onChange = {onChangeDisplay}
+							/>
+
 						</PanelBody>
 					</Panel>
 				</InspectorControls>
 			</Fragment>,
 
-			<div className={className} style={backgroundStyle}>
-				<div class="gutencard-title">
-					<h2>Gutencard Block</h2>
-				</div>
+			<div className="gutencard-title">
+				<h2>{__('Gutencard Block', 'gutencard')}</h2>
+			</div>,
+			<div className={[className, displayValue].join(' ')} style={backgroundStyle}>
 				<div className="card-image">
 					<MediaUploadCheck>
 						<MediaUpload
-							onSelect={media => { setAttributes({ imageAlt: media.alt, imageUrl: media.sizes.large.url }); }}
-							allowedTypes={ALLOWED_MEDIA_TYPES}
-							type="image"
-							value={imageId}
-							render={({ open }) => onSelectImage(open)}
+							onSelect = {media => { setAttributes({ imageAlt: media.alt, imageUrl: media.sizes.large.url }); }}
+							allowedTypes = {ALLOWED_MEDIA_TYPES}
+							type = "image"
+							value = {imageId}
+							render = {({ open }) => onSelectImage( open )}
 						/>
 					</MediaUploadCheck>
 					{!!imageUrl &&
 						<MediaUploadCheck>
 							<div className="button-container">
 								<Button className="button" onClick={onRemoveImage} isLink isDestructive>
-									{__('Remove', 'gutenberg')}
+									{__( 'Remove', 'gutencard' )}
 								</Button>
 							</div>
 						</MediaUploadCheck>
@@ -219,21 +250,21 @@ registerBlockType( 'gutencard/block-gutencard', {
 				<div className="card-content">
 					<div className="card-title">
 						<RichText
-							className="heading"
-							tagName="h3"
-							style={contentStyle}
-							onChange={onChangeTitle}
-							placeholder="Your card title"
-							value={title}
+							className = "heading"
+							tagName = "h3"
+							style = {contentStyle}
+							onChange = {onChangeTitle}
+							placeholder = {__( 'Your card title', 'gutencard' )}
+							value = {title}
 						/>
 					</div>
 					<div className="card-description">
 						<RichText
-							tagName="p"
-							style={contentStyle}
-							onChange={onChangeContent}
-							placeholder="Your card content"
-							value={content}
+							tagName = "p"
+							style = {contentStyle}
+							onChange = {onChangeContent}
+							placeholder = {__( 'Your card content', 'gutencard' )}
+							value = {content}
 						/>
 					</div>
 				</div>
@@ -269,13 +300,13 @@ registerBlockType( 'gutencard/block-gutencard', {
 
 		return (
 
-			<div className="card" style={props.attributes.backgroundStyle}>
+			<div className={['card', props.attributes.displayValue].join(' ')} style={props.attributes.backgroundStyle}>
 
 				<div className="card-image">
 					{cardImage(props.attributes.imageUrl, props.attributes.imageAlt)}
 				</div>
 
-				<div className="card-content">
+				<div className="card-content" style={props.option}>
 					<div className="card-title">
 						<RichText.Content style={props.attributes.contentStyle} tagName="h3" value={props.attributes.title} />
 					</div>

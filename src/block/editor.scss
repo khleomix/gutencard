@@ -5,6 +5,21 @@
 
 [data-type='gutencard/block-gutencard'] {
 
+	.gutencard-title {
+		background: $gradient-bg;
+		text-align: center;
+		text-transform: uppercase;
+
+		h2 {
+			color: $color-white;
+			font-size: rem(20);
+			font-weight: 400;
+			letter-spacing: rem(1);
+			margin: 0 auto;
+			padding: rem(10);
+		}
+	} // .gutencard-title
+
 	&[data-align='full'] {
 		.card-image {
 			max-height: rem(600);
@@ -23,19 +38,91 @@
 .wp-block-gutencard-block-gutencard {
 	border: rem(1) solid $color-dove-gray;
 
-	.gutencard-title {
-		background: $gradient-bg;
-		text-align: center;
-		text-transform: uppercase;
+	&.components-panel {
+		border: none;
+	} // &.components-panel
 
-		h2 {
-			color: $color-white;
-			font-size: rem(20);
-			font-weight: 400;
-			letter-spacing: rem(1);
-			margin: rem(10) auto;
-		}
-	} // .gutencard-title
+	.components-radio-control__option {
+		background-color: $color-white;
+		display: block;
+		margin: rem(10) 0;
+		position: relative;
+
+		label {
+			color: $color-mineshaft;
+			cursor: pointer;
+			display: block;
+			overflow: hidden;
+			padding: rem(12) rem(20) rem(12) rem(40);
+			position: relative;
+			text-align: left;
+			transition: color 200ms ease-in;
+			width: 100%;
+			z-index: 2;
+
+			&::before {
+				background: $gradient-bg;
+				border-radius: 50%;
+				content: '';
+				height: rem(10);
+				left: 50%;
+				opacity: 0;
+				position: absolute;
+				top: 50%;
+				transform: translate(-50%, -50%) scale3d(1, 1, 1);
+				transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+				width: rem(10);
+				z-index: -1;
+			} // &::before
+
+			&::after {
+				background-color: $color-white;
+				background-position: rem(2) rem(3);
+				background-repeat: no-repeat;
+				border: rem(1) solid $color-amaranth;
+				border-radius: 50%;
+				content: '';
+				cursor: pointer;
+				height: rem(20);
+				left: rem(10);
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				transition: 500ms ease-in;
+				width: rem(20);
+				z-index: 2;
+			} // &::after
+
+		} // label
+
+		input[type='radio'] {
+			cursor: pointer;
+			height: rem(20);
+			order: 1;
+			position: absolute;
+			right: rem(20);
+			top: 50%;
+			transform: translateY(-50%);
+			visibility: hidden;
+			width: rem(20);
+			z-index: 2;
+
+			&:checked ~ label {
+				color: $color-white;
+
+				&::before {
+					opacity: 1;
+					transform: translate(-50%, -50%) scale3d(56, 56, 1);
+				} // &::before
+
+				&::after {
+					background: $gradient-alt-bg;
+					border-color: $color-white;
+				} // &::after
+			} // &:checked ~ label
+		} // input[type='radio']
+
+	} // .components-radio-control__option
 
 	.button-container {
 		width: 100%;
@@ -69,6 +156,7 @@
 	.card-image {
 		display: flex;
 		flex-direction: column;
+		min-height: rem(90);
 		position: relative;
 
 		img {
