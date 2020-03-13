@@ -198,10 +198,12 @@ registerBlockType( 'gutencard/block-gutencard', {
 						>
 							<PanelRow>Choose a text color.</PanelRow>
 							<ColorPalette
+								value = {contentStyle.color}
 								onChange = {onChangeTextColor}
 							/>
 							<PanelRow>Choose a background color.</PanelRow>
 							<ColorPalette
+								value = {backgroundStyle.backgroundColor}
 								onChange = {onChangeBackgroundColor}
 							/>
 						</PanelBody>
