@@ -22,13 +22,13 @@ Features optional featured image, title and description fields. Text color as we
 4. Run `npm start` or `npm run build` to compile.
 
 ## Frequently Asked Questions ##
-= Are all fields required? =
+# Are all fields required? #
 Featured image, title, and description fields are all optional and you can use one or a combination of two or all fields according to your needs.
 
-= How do you change the alignment and width of Gutencard? =
+# How do you change the alignment and width of Gutencard? #
 The block can be set as full-width or wide-width together with the option to change text alignment through the Block Toolbar.
 
-= How to change text color and background color? =
+# How to change text color and background color? #
 Gutencard settings on the sidebar allows you to set the following:
 1. Color settings allow text color and background color change.
 42 Display settings control card layout, defaults to `column` can be set to the following: `column`, `column-reverse`, `row`, `row-reverse`
