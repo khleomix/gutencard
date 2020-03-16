@@ -64,6 +64,9 @@ registerBlockType( 'gutencard/block-gutencard', {
 		},
 		backgroundStyle: {
 			type: 'object',
+			default: {
+				backgroundColor: 'transparent',
+			}
 		},
 		imageAlt: {
 			attribute: 'alt',
