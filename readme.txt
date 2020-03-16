@@ -25,12 +25,6 @@ Features optional featured image, title and description fields. Text color as we
 7. Text alignment can also be changed, alignment will be the same for both title and description.
 8. Card layout can be set to `column`, `column-reverse`, `row`, `row-reverse`.
 
-== Development Setup ==
-1. Clone the repo https://github.com/khleomix/gutencard `develop` branch to the `/wp-contents/plugins/`directory run `git clone -b develop git@github.com:khleomix/gutencard.git`
-2. Navigate to the plugin directory, run `cd gutencard`
-3. Install NPM: `npm install`
-4. Run `npm start` or `npm run build` to compile.
-
 == Frequently Asked Questions ==
 = Are all fields required? =
 Featured image, title, and description fields are all optional and you can use one or a combination of two or all fields according to your needs.
