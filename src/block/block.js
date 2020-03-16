@@ -283,22 +283,26 @@ registerBlockType( 'gutencard/block-gutencard', {
 
 			if (imgAlt) {
 				return (
-					<img
-						className="featured-image"
-						src={imgSrc}
-						alt={imgAlt}
-					/>
+					<div className="card-image">
+						<img
+							className="featured-image"
+							src={imgSrc}
+							alt={imgAlt}
+						/>
+					</div>
 				);
 			}
 
 			// No alt set, so let's hide it from screen readers
 			return (
-				<img
-					className="featured-image"
-					src={imgSrc}
-					alt=""
-					aria-hidden="true"
-				/>
+				<div className="card-image">
+					<img
+						className="featured-image"
+						src={imgSrc}
+						alt=""
+						aria-hidden="true"
+					/>
+				</div>
 			);
 		};
 
@@ -306,9 +310,7 @@ registerBlockType( 'gutencard/block-gutencard', {
 
 			<div className={['card', props.attributes.displayValue].join(' ')} style={props.attributes.backgroundStyle}>
 
-				<div className="card-image">
-					{cardImage(props.attributes.imageUrl, props.attributes.imageAlt)}
-				</div>
+				{cardImage(props.attributes.imageUrl, props.attributes.imageAlt)}
 
 				<div className="card-content" style={props.option}>
 					<div className="card-title">
