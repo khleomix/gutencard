@@ -17,6 +17,10 @@
 			letter-spacing: rem(1);
 			margin: 0 auto;
 			padding: rem(10);
+
+			&::before {
+				display: none;
+			} // &::before
 		}
 	} // .gutencard-title
 
