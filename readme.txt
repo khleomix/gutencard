@@ -41,7 +41,7 @@ The block can be set as full-width or wide-width together with the option to cha
 = How to change text color and background color? =
 Gutencard settings on the sidebar allows you to set the following:
 1. Color settings allow text color and background color change.
-42 Display settings control card layout, defaults to `column` can be set to the following: `column`, `column-reverse`, `row`, `row-reverse`
+2. Display settings control card layout, defaults to `column` can be set to the following: `column`, `column-reverse`, `row`, `row-reverse`
 
 == Changelog ==
 = 1.0.1 =
