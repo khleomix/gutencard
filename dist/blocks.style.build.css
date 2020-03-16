@@ -1,0 +1,98 @@
+.wp-block-gutencard-block-gutencard {
+  background-color: transparent;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  margin: 0 auto; }
+  .entry .entry-content .wp-block-gutencard-block-gutencard {
+    margin-left: auto;
+    margin-right: auto; }
+  .wp-block-gutencard-block-gutencard.alignfull .card-image {
+    max-height: 37.5rem;
+    overflow: hidden; }
+  .wp-block-gutencard-block-gutencard.alignwide .card-image {
+    max-height: 46.875rem;
+    overflow: hidden; }
+  .wp-block-gutencard-block-gutencard.row {
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-direction: row;
+        flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    .wp-block-gutencard-block-gutencard.row .card-image {
+      -ms-flex: 1;
+          flex: 1; }
+      .wp-block-gutencard-block-gutencard.row .card-image img {
+        height: 100%;
+        -o-object-fit: cover;
+           object-fit: cover;
+        width: auto; }
+    .wp-block-gutencard-block-gutencard.row .card-content {
+      -ms-flex: 1;
+          flex: 1;
+      padding: 0; }
+      .wp-block-gutencard-block-gutencard.row .card-content .card-title,
+      .wp-block-gutencard-block-gutencard.row .card-content .card-description {
+        padding: 0 1.875rem; }
+  .wp-block-gutencard-block-gutencard.row-reverse {
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-direction: row-reverse;
+        flex-direction: row-reverse;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    .wp-block-gutencard-block-gutencard.row-reverse .card-image {
+      -ms-flex: 1;
+          flex: 1; }
+      .wp-block-gutencard-block-gutencard.row-reverse .card-image img {
+        height: 100%;
+        -o-object-fit: cover;
+           object-fit: cover;
+        width: auto; }
+    .wp-block-gutencard-block-gutencard.row-reverse .card-content {
+      -ms-flex: 1;
+          flex: 1;
+      padding: 0; }
+      .wp-block-gutencard-block-gutencard.row-reverse .card-content .card-title,
+      .wp-block-gutencard-block-gutencard.row-reverse .card-content .card-description {
+        padding: 0 1.875rem; }
+  .wp-block-gutencard-block-gutencard.column-reverse {
+    -ms-flex-direction: column-reverse;
+        flex-direction: column-reverse; }
+  .wp-block-gutencard-block-gutencard .card-image {
+    -ms-flex-align: center;
+        align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center; }
+    .wp-block-gutencard-block-gutencard .card-image .featured-image {
+      height: auto;
+      -o-object-fit: cover;
+         object-fit: cover;
+      -o-object-position: center;
+         object-position: center;
+      width: 100%; }
+  .wp-block-gutencard-block-gutencard .card-content {
+    -ms-flex: 1;
+        flex: 1;
+    padding: 1.875rem; }
+    .wp-block-gutencard-block-gutencard .card-content .card-title h3 {
+      margin: 0.625rem 0 1.875rem; }
+    .wp-block-gutencard-block-gutencard .card-content .card-description p {
+      padding: 0.625rem 0; }
+  @media all and (max-width: 375px) {
+    .wp-block-gutencard-block-gutencard.row {
+      -ms-flex-direction: column;
+          flex-direction: column; }
+      .wp-block-gutencard-block-gutencard.row .card-content {
+        padding: 1.875rem 0; }
+    .wp-block-gutencard-block-gutencard.row-reverse {
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse; }
+      .wp-block-gutencard-block-gutencard.row-reverse .card-content {
+        padding: 1.875rem 0; }
+    .wp-block-gutencard-block-gutencard .card-image img {
+      max-height: 31.25rem; } }
