@@ -34,12 +34,12 @@ const ALLOWED_MEDIA_TYPES = ['image'];
  *                             registered; otherwise `undefined`.
  */
 registerBlockType( 'gutencard/block-gutencard', {
-	title: __( 'Gutencard' ),
+	title: __( 'Gutencard', 'gutencard' ),
 	icon: { background: '#11acee', src: icons.gutencard },
 	category: 'common',
 	keywords: [
-		__( 'gutencard' ),
-		__( 'custom card block' ),
+		__( 'gutencard', 'gutencard' ),
+		__( 'custom card block', 'gutencard' ),
 	],
 	supports: {
 		align: ['full', 'wide'],
@@ -94,9 +94,9 @@ registerBlockType( 'gutencard/block-gutencard', {
 	 * @returns {Mixed} JSX Component.
 	 */
 	edit: ( props ) => {
-		let { attributes: { title, content, contentStyle, backgroundStyle, image, imageUrl, imageId, displayValue }, setAttributes, className } = props;
+		let { attributes: { title, content, contentStyle, backgroundStyle, image, imageUrl, imageId, displayValue }, setAttributes, className }=props;
 
-		const onSelectImage = (openEvent) => {
+		const onSelectImage=(openEvent) => {
 			if (imageUrl) {
 				return (
 					<img
@@ -110,17 +110,10 @@ registerBlockType( 'gutencard/block-gutencard', {
 				return (
 					<div className="button-container">
 						<Button
-							className = {!imageId ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
-							onClick = {openEvent}>
+							className={!imageId ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
+							onClick={openEvent}
+						>
 							{!imageId && (__( 'Set featured image', 'gutencard' ))}
-							{!!imageId && imageUrl &&
-								<ResponsiveWrapper
-									naturalWidth = {image.media_details.width}
-									naturalHeight = {image.media_details.height}
-								>
-									<img src={image.source_url} alt={__( 'Featured Image', 'gutencard' )} />
-								</ResponsiveWrapper>
-							}
 						</Button>
 					</div>
 				);
@@ -184,8 +177,8 @@ registerBlockType( 'gutencard/block-gutencard', {
 
 			<BlockControls>
 				<AlignmentToolbar
-					value = {contentStyle.textAlign}
-					onChange = {onChangeAlignment}
+					value={contentStyle.textAlign}
+					onChange={onChangeAlignment}
 				/>
 			</BlockControls>,
 
@@ -193,34 +186,34 @@ registerBlockType( 'gutencard/block-gutencard', {
 				<InspectorControls>
 					<Panel className={className}>
 						<PanelBody
-							title = {__( 'Color Settings', 'gutencard' )}
-							initialOpen = {true}
+							title={__( 'Color Settings', 'gutencard' )}
+							initialOpen={true}
 						>
-							<PanelRow>Choose a text color.</PanelRow>
+							<PanelRow>{__('Choose a text color.', 'gutencard')}</PanelRow>
 							<ColorPalette
-								value = {contentStyle.color}
-								onChange = {onChangeTextColor}
+								value={contentStyle.color}
+								onChange={onChangeTextColor}
 							/>
-							<PanelRow>Choose a background color.</PanelRow>
+							<PanelRow>{__('Choose a background color.', 'gutencard')}</PanelRow>
 							<ColorPalette
-								value = {backgroundStyle.backgroundColor}
-								onChange = {onChangeBackgroundColor}
+								value={backgroundStyle.backgroundColor}
+								onChange={onChangeBackgroundColor}
 							/>
 						</PanelBody>
 						<PanelBody
-							title = {__( 'Display Settings', 'gutencard' )}
-							initialOpen = {false}
+							title={__( 'Display Settings', 'gutencard' )}
+							initialOpen={false}
 						>
 							<RadioControl
-								label = {__( 'Choose Card Layout', 'gutencard' )}
-								selected = {displayValue}
-								options = {[
+								label={__( 'Choose Card Layout', 'gutencard' )}
+								selected={displayValue}
+								options={[
 									{ label: 'Column', value: 'column' },
 									{ label: 'Column Reverse', value: 'column-reverse' },
 									{ label: 'Row', value: 'row' },
 									{ label: 'Row Reverse', value: 'row-reverse' },
 								]}
-								onChange = {onChangeDisplay}
+								onChange={onChangeDisplay}
 							/>
 
 						</PanelBody>
@@ -235,17 +228,20 @@ registerBlockType( 'gutencard/block-gutencard', {
 				<div className="card-image">
 					<MediaUploadCheck>
 						<MediaUpload
-							onSelect = {media => { setAttributes({ imageAlt: media.alt, imageUrl: media.sizes.large.url }); }}
-							allowedTypes = {ALLOWED_MEDIA_TYPES}
-							type = "image"
-							value = {imageId}
-							render = {({ open }) => onSelectImage( open )}
+							onSelect={media => { setAttributes({ imageAlt: media.alt, imageUrl: media.sizes.large.url }); }}
+							allowedTypes={ALLOWED_MEDIA_TYPES}
+							type="image"
+							value={imageId}
+							render={({ open }) => onSelectImage( open )}
 						/>
 					</MediaUploadCheck>
 					{!!imageUrl &&
 						<MediaUploadCheck>
 							<div className="button-container">
-								<Button className="button" onClick={onRemoveImage} isLink isDestructive>
+								<Button
+									className="button"
+									onClick={onRemoveImage} isLink isDestructive
+								>
 									{__( 'Remove', 'gutencard' )}
 								</Button>
 							</div>
@@ -255,21 +251,21 @@ registerBlockType( 'gutencard/block-gutencard', {
 				<div className="card-content">
 					<div className="card-title">
 						<RichText
-							className = "heading"
-							tagName = "h3"
-							style = {contentStyle}
-							onChange = {onChangeTitle}
-							placeholder = {__( 'Your card title', 'gutencard' )}
-							value = {title}
+							className="heading"
+							tagName="h3"
+							style={contentStyle}
+							onChange={onChangeTitle}
+							placeholder={__( 'Your card title', 'gutencard' )}
+							value={title}
 						/>
 					</div>
 					<div className="card-description">
 						<RichText
-							tagName = "p"
-							style = {contentStyle}
-							onChange = {onChangeContent}
-							placeholder = {__( 'Your card content', 'gutencard' )}
-							value = {content}
+							tagName="p"
+							style={contentStyle}
+							onChange={onChangeContent}
+							placeholder={__( 'Your card content', 'gutencard' )}
+							value={content}
 						/>
 					</div>
 				</div>
@@ -279,15 +275,15 @@ registerBlockType( 'gutencard/block-gutencard', {
 	},
 	save: (props) => {
 
-		const cardImage = (src, alt) => {
-			if (!src) return null;
+		const cardImage=(imgSrc, imgAlt) => {
+			if (!imgSrc) return null;
 
-			if (alt) {
+			if (imgAlt) {
 				return (
 					<img
 						className="featured-image"
-						src={src}
-						alt={alt}
+						src={imgSrc}
+						alt={imgAlt}
 					/>
 				);
 			}
@@ -296,7 +292,7 @@ registerBlockType( 'gutencard/block-gutencard', {
 			return (
 				<img
 					className="featured-image"
-					src={src}
+					src={imgSrc}
 					alt=""
 					aria-hidden="true"
 				/>
