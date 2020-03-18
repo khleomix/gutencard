@@ -280,9 +280,12 @@ registerBlockType( 'unicard/block-unicard', {
 	},
 	save: (props) => {
 
+		const background = props.attributes.backgroundStyle;
+		const display = props.attributes.displayValue;
+		const layout = props.option;
+		const style = props.attributes.contentStyle;
 		const title = props.attributes.title;
 		const content = props.attributes.content;
-		const style = props.attributes.contentStyle;
 		const url = props.attributes.imageUrl;
 		const alt = props.attributes.imageAlt;
 
@@ -350,11 +353,11 @@ registerBlockType( 'unicard/block-unicard', {
 
 		return (
 
-			<div className={['card', props.attributes.displayValue].join(' ')} style={props.attributes.backgroundStyle}>
+			<div className={['card', display].join(' ')} style={background}>
 
 				{cardImage(url, alt)}
 
-				<div className="card-content" style={props.option}>
+				<div className="card-content" style={layout}>
 					{title.length > 0 &&
 						cardTitle()
 					}
