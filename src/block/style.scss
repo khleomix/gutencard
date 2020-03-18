@@ -3,7 +3,7 @@
 // CSS for both Frontend+Backend.
 //--------------------------------------------------------------
 
-.wp-block-gutencard-block-gutencard  {
+.wp-block-unicard-block-unicard  {
 	background-color: transparent;
 	display: flex;
 	flex-direction: column;
@@ -76,7 +76,7 @@
 
 		.card-content {
 			flex: 1;
-			padding: 0;
+			padding: rem(10) 0;
 
 			.card-title,
 			.card-description {
@@ -107,17 +107,22 @@
 		flex: 1;
 		padding: rem(30);
 
+		&:empty {
+			display: none;
+		} // &:blank
+
 		.card-title {
 			h3 {
-				margin: rem(10) 0 rem(30);
+				margin: rem(20) 0;
 			}
 		} // .card-title
 
 		.card-description {
 
 			p {
-				padding: rem(10) 0;
-			}
+				margin-bottom: rem(20);
+				padding: rem(10) 0 0;
+			} // p
 
 		} // .card-description
 
@@ -148,4 +153,4 @@
 		} // .card-image
 	} // max-width: $iphone
 
-} // .wp-block-gutencard-block-gutencard
+} // .wp-block-unicard-block-unicard

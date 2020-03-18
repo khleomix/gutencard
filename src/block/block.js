@@ -1,5 +1,5 @@
 /**
- * BLOCK: gutencard
+ * BLOCK: unicard
  *
  * Registering a customizable block.
  */
@@ -21,7 +21,7 @@ const ALLOWED_MEDIA_TYPES = ['image'];
 
 
 /**
- * Register: Gutencard Block.
+ * Register: UniCard Block.
  *
  * Registers a new block provided a unique name and an object defining its
  * behavior. Once registered, the block is made editor as an option to any
@@ -33,13 +33,13 @@ const ALLOWED_MEDIA_TYPES = ['image'];
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'gutencard/block-gutencard', {
-	title: __( 'Gutencard', 'gutencard' ),
-	icon: { background: '#11acee', src: icons.gutencard },
+registerBlockType( 'unicard/block-unicard', {
+	title: __( 'UniCard', 'unicard' ),
+	icon: { background: '#11acee', src: icons.unicard },
 	category: 'common',
 	keywords: [
-		__( 'gutencard', 'gutencard' ),
-		__( 'custom card block', 'gutencard' ),
+		__( 'unicard', 'unicard' ),
+		__( 'custom card block', 'unicard' ),
 	],
 	supports: {
 		align: ['full', 'wide'],
@@ -116,7 +116,7 @@ registerBlockType( 'gutencard/block-gutencard', {
 							className={!imageId ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
 							onClick={openEvent}
 						>
-							{!imageId && (__( 'Set featured image', 'gutencard' ))}
+							{!imageId && (__( 'Set featured image', 'unicard' ))}
 						</Button>
 					</div>
 				);
@@ -189,26 +189,26 @@ registerBlockType( 'gutencard/block-gutencard', {
 				<InspectorControls>
 					<Panel className={className}>
 						<PanelBody
-							title={__( 'Color Settings', 'gutencard' )}
+							title={__( 'Color Settings', 'unicard' )}
 							initialOpen={true}
 						>
-							<PanelRow>{__('Choose a text color.', 'gutencard')}</PanelRow>
+							<PanelRow>{__('Choose a text color.', 'unicard')}</PanelRow>
 							<ColorPalette
 								value={contentStyle.color}
 								onChange={onChangeTextColor}
 							/>
-							<PanelRow>{__('Choose a background color.', 'gutencard')}</PanelRow>
+							<PanelRow>{__('Choose a background color.', 'unicard')}</PanelRow>
 							<ColorPalette
 								value={backgroundStyle.backgroundColor}
 								onChange={onChangeBackgroundColor}
 							/>
 						</PanelBody>
 						<PanelBody
-							title={__( 'Display Settings', 'gutencard' )}
+							title={__( 'Display Settings', 'unicard' )}
 							initialOpen={false}
 						>
 							<RadioControl
-								label={__( 'Choose Card Layout', 'gutencard' )}
+								label={__( 'Choose Card Layout', 'unicard' )}
 								selected={displayValue}
 								options={[
 									{ label: 'Column', value: 'column' },
@@ -224,8 +224,8 @@ registerBlockType( 'gutencard/block-gutencard', {
 				</InspectorControls>
 			</Fragment>,
 
-			<div className="gutencard-title">
-				<h2>{__('Gutencard Block', 'gutencard')}</h2>
+			<div className="unicard-title">
+				<h2>{__('UniCard Block', 'unicard')}</h2>
 			</div>,
 			<div className={[className, displayValue].join(' ')} style={backgroundStyle}>
 				<div className="card-image">
@@ -245,7 +245,7 @@ registerBlockType( 'gutencard/block-gutencard', {
 									className="button"
 									onClick={onRemoveImage} isLink isDestructive
 								>
-									{__( 'Remove', 'gutencard' )}
+									{__( 'Remove', 'unicard' )}
 								</Button>
 							</div>
 						</MediaUploadCheck>
@@ -258,7 +258,8 @@ registerBlockType( 'gutencard/block-gutencard', {
 							tagName="h3"
 							style={contentStyle}
 							onChange={onChangeTitle}
-							placeholder={__( 'Your card title', 'gutencard' )}
+							placeholder={__( 'Your card title', 'unicard' )}
+							keepPlaceholderOnFocus={true}
 							value={title}
 						/>
 					</div>
@@ -267,7 +268,8 @@ registerBlockType( 'gutencard/block-gutencard', {
 							tagName="p"
 							style={contentStyle}
 							onChange={onChangeContent}
-							placeholder={__( 'Your card content', 'gutencard' )}
+							placeholder={__( 'Your card content', 'unicard' )}
+							keepPlaceholderOnFocus={true}
 							value={content}
 						/>
 					</div>
@@ -277,6 +279,12 @@ registerBlockType( 'gutencard/block-gutencard', {
 		];
 	},
 	save: (props) => {
+
+		const title = props.attributes.title;
+		const content = props.attributes.content;
+		const style = props.attributes.contentStyle;
+		const url = props.attributes.imageUrl;
+		const alt = props.attributes.imageAlt;
 
 		const cardImage=(imgSrc, imgAlt) => {
 			if (!imgSrc) return null;
@@ -291,7 +299,7 @@ registerBlockType( 'gutencard/block-gutencard', {
 						/>
 					</div>
 				);
-			}
+			};
 
 			// No alt set, so let's hide it from screen readers
 			return (
@@ -306,19 +314,53 @@ registerBlockType( 'gutencard/block-gutencard', {
 			);
 		};
 
+		const cardTitle = () => {
+			if (!title) return null;
+
+			if (title) {
+				return (
+					<div className="card-title">
+						<RichText.Content
+							style={style}
+							tagName="h3"
+							value={title}
+						/>
+					</div>
+				);
+			};
+
+		};
+
+		const cardContent = () => {
+			if (!content) return null;
+
+			if (content) {
+				return (
+					<div className="card-description">
+						<RichText.Content
+							style={style}
+							tagName="p"
+							value={content}
+						/>
+					</div>
+				);
+			};
+
+		};
+
 		return (
 
 			<div className={['card', props.attributes.displayValue].join(' ')} style={props.attributes.backgroundStyle}>
 
-				{cardImage(props.attributes.imageUrl, props.attributes.imageAlt)}
+				{cardImage(url, alt)}
 
 				<div className="card-content" style={props.option}>
-					<div className="card-title">
-						<RichText.Content style={props.attributes.contentStyle} tagName="h3" value={props.attributes.title} />
-					</div>
-					<div className="card-description">
-						<RichText.Content style={props.attributes.contentStyle} tagName="p" value={props.attributes.content} />
-					</div>
+					{title.length > 0 &&
+						cardTitle()
+					}
+					{content.length > 0 &&
+						cardContent()
+					}
 				</div>
 
 			</div>

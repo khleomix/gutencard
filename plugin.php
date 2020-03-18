@@ -1,16 +1,16 @@
 <?php
 /**
- * Plugin Name: Gutencard
- * Plugin URI: https://github.com/khleomix/gutencard
- * Description: Gutencard — is a Custom Gutenberg Card Block Plugin
- * Author: JC Palmes
- * Author URI: https://khleomix.com/
+ * Plugin Name: UniCard Block
+ * Plugin URI: https://github.com/khleomix/unicard
+ * Description: A block plugin that can be used to create a card block with featured image, title, description fields. All fields are optional.
+ * Author: khleomix
+ * Author URI: https://profiles.wordpress.org/khleomix/
  * Version: 1.0.0
  * License: GPL2+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  *
  * @since   1.0.0
- * @package gutencard
+ * @package unicard
  */
 
 // Exit if accessed directly.

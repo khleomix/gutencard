@@ -3,9 +3,9 @@
 // CSS for just Backend enqueued after style.scss
 //--------------------------------------------------------------
 
-[data-type='gutencard/block-gutencard'] {
+[data-type='unicard/block-unicard'] {
 
-	.gutencard-title {
+	.unicard-title {
 		background: $gradient-bg;
 		text-align: center;
 		text-transform: uppercase;
@@ -22,7 +22,7 @@
 				display: none;
 			} // &::before
 		}
-	} // .gutencard-title
+	} // .unicard-title
 
 	&[data-align='full'] {
 		.card-image {
@@ -37,9 +37,9 @@
 			overflow: hidden;
 		} // .card-image
 	} // &[data-align='full']
-} // [data-type='gutencard/block-gutencard']
+} // [data-type='unicard/block-unicard']
 
-.wp-block-gutencard-block-gutencard {
+.wp-block-unicard-block-unicard {
 	border: rem(1) solid $color-dove-gray;
 
 	&.components-panel {
@@ -244,4 +244,4 @@
 		} // .button-container
 	} // .card-image
 
-} // .wp-block-gutencard-block-gutencard
+} // .wp-block-unicard-block-unicard
