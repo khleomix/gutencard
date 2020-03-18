@@ -36,9 +36,10 @@ UniCard settings on the sidebar allows you to set the following:
 ## Changelog ##
 
 ### 1.0.1 ###
+* Added conditional to only show field containers if not empty.
 * Added Display Option to change card layout.
 
 ### 1.0.0 ###
-* First release
 * Update README
+* First release
 
