@@ -15,7 +15,7 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks;
 const { RichText, BlockControls, AlignmentToolbar, InspectorControls, ColorPalette, MediaUpload, MediaUploadCheck } = wp.blockEditor;
 const { Fragment } = wp.element;
-const { Panel, PanelBody, PanelRow, Button, ResponsiveWrapper, RadioControl } = wp.components;
+const { Panel, PanelBody, PanelRow, Button, RadioControl } = wp.components;
 
 const ALLOWED_MEDIA_TYPES = ['image'];
 
@@ -43,6 +43,7 @@ registerBlockType( 'unicard/block-unicard', {
 	],
 	supports: {
 		align: ['full', 'wide'],
+		anchor: true,
 	},
 	attributes: {
 		title: {
@@ -97,7 +98,7 @@ registerBlockType( 'unicard/block-unicard', {
 	 * @returns {Mixed} JSX Component.
 	 */
 	edit: ( props ) => {
-		let { attributes: { title, content, contentStyle, backgroundStyle, image, imageUrl, imageId, displayValue }, setAttributes, className }=props;
+		let { attributes: { title, content, contentStyle, backgroundStyle, imageUrl, imageId, displayValue }, setAttributes, className }=props;
 
 		const onSelectImage=(openEvent) => {
 			if (imageUrl) {
