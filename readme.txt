@@ -2,6 +2,7 @@
 Contributors: khleomix
 Author URI: https://khleomix.com/
 Plugin URL: https://khleomix.com/category/plugins/
+Donate link: https://khleomix.com/contact/
 Tags: gutenberg, custom card block
 Requires at least: 5.2.0
 Tested up to: 5.3.2
@@ -36,6 +37,13 @@ The block can be set as full-width or wide-width together with the option to cha
 UniCard settings on the sidebar allows you to set the following:
 1. Color settings allow text color and background color change.
 2. Display settings control card layout, defaults to `column` can be set to the following: `column`, `column-reverse`, `row`, `row-reverse`
+
+== Screenshots ==
+1. UniCard Block Settings.
+2. Front-end output.
+
+== Upgrade Notice ==
+TBA
 
 == Changelog ==
 = 1.0.1 =
